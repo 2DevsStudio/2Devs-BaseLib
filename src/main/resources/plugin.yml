@@ -1,0 +1,5 @@
+name: BaseLib
+version: '${project.version}'
+main: com.twodevsstudio.devsbaselib.BaseLib
+api-version: 1.17
+authors: [ IgniteDEV, vision, 2DevsStudio ]
