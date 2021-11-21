@@ -1,5 +1,6 @@
 package com.twodevsstudio.devsbaselib.config;
 
+import com.twodevsstudio.devsbaselib.base.AbstractItem;
 import com.twodevsstudio.devsbaselib.base.BaseItem;
 import com.twodevsstudio.simplejsonconfig.api.Config;
 import com.twodevsstudio.simplejsonconfig.interfaces.Configuration;
@@ -14,31 +15,23 @@ import org.jetbrains.annotations.Nullable;
 @Configuration("itembase.json")
 public class BaseLibItemBase extends Config {
 
-  private List<BaseItem> items = exampleItems();
+  private List<AbstractItem> items = exampleItems();
 
   @Nullable
-  public BaseItem getItemById(String id){
-    return this.items.stream().filter(baseItem -> baseItem.getId().equalsIgnoreCase(id)).findFirst().orElse(null);
+  public AbstractItem getItemById(String id){
+    return this.items.stream()
+        .filter(abstractItem -> ((BaseItem) abstractItem).getId().equalsIgnoreCase(id))
+        .findFirst()
+        .orElse(null);
   }
 
-  private List<BaseItem> exampleItems() {
-    List<BaseItem> baseItems = new ArrayList<>();
+  private List<AbstractItem> exampleItems() {
+    List<AbstractItem> baseItems = new ArrayList<>();
 
     baseItems.add(
-        BaseItem.builder()
-            .id("exampleItem1")
-            .displayName("Example Item 1")
-            .amount(3)
-            .material(Material.ANVIL)
-            .build());
-
+        new BaseItem("exampleItem1", Material.ANVIL, 1, "Example Item 1"));
     baseItems.add(
-        BaseItem.builder()
-            .id("exampleItem2")
-            .displayName("Example Item 2")
-            .amount(5)
-            .material(Material.NETHER_PORTAL)
-            .build());
+        new BaseItem("exampleItem2", Material.DIRT, 1, "Example Item 2"));
     return baseItems;
   }
 }

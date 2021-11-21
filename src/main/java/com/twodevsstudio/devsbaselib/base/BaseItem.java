@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -15,20 +15,33 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+@AllArgsConstructor
 @Data
-@Builder
-public class BaseItem {
+public class BaseItem implements AbstractItem {
 
   private String id;
   private String displayName;
 
-  @Builder.Default private Material material = Material.DIRT;
-  @Builder.Default private int amount = 1;
-  @Builder.Default private List<String> lore = new ArrayList<>();
-  @Builder.Default private Map<String, String> nbtTags = new HashMap<>();
+  private Material material = Material.DIRT;
+  private int amount = 1;
 
-  @Builder.Default
+  private Map<String, String> nbtTags = new HashMap<>();
+
+  private List<String> lore = new ArrayList<>();
   private List<ItemFlag> flags = new ArrayList<>(Arrays.asList(ItemFlag.values().clone()));
+
+  public BaseItem(String id, Material material, int amount) {
+    this.id = id;
+    this.material = material;
+    this.amount = amount;
+  }
+
+  public BaseItem(String id, Material material, int amount, String displayName) {
+    this.id = id;
+    this.material = material;
+    this.amount = amount;
+    this.displayName = displayName;
+  }
 
   public ItemStack give(Player player) {
     ItemStack itemStack = getItemStack();
