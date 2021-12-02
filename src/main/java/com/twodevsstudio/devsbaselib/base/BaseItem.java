@@ -2,11 +2,6 @@ package com.twodevsstudio.devsbaselib.base;
 
 import com.twodevsstudio.devsbaselib.util.TextUtility;
 import de.tr7zw.changeme.nbtapi.NBTItem;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.bukkit.Material;
@@ -14,6 +9,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.*;
 
 @AllArgsConstructor
 @Data
