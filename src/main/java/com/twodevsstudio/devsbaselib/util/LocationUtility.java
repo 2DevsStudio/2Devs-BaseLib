@@ -1,6 +1,5 @@
 package com.twodevsstudio.devsbaselib.util;
 
-import com.twodevsstudio.devsbaselib.BaseLib;
 import lombok.experimental.UtilityClass;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
@@ -35,6 +34,15 @@ public class LocationUtility {
     BlockFace.WEST,
     BlockFace.NORTH_WEST
   };
+
+  public Location normalize(Location toNormalize) {
+    toNormalize = toNormalize.clone();
+    toNormalize.setX(toNormalize.getBlockX());
+    toNormalize.setY(toNormalize.getBlockY());
+    toNormalize.setZ(toNormalize.getBlockZ());
+
+    return toNormalize;
+  }
 
   public double calculateDistance2D(Location firstLocation, Location secondLocation) {
     return Math.sqrt(Math.pow(firstLocation.getX() - secondLocation.getX(), 2))
@@ -127,14 +135,7 @@ public class LocationUtility {
 
   @NotNull
   public Location decideLocation(
-      World world,
-      int minX,
-      int maxX,
-      int minZ,
-      int maxZ,
-      int minY,
-      int maxY,
-      boolean safeCheck) {
+      World world, int minX, int maxX, int minZ, int maxZ, int minY, int maxY, boolean safeCheck) {
     while (true) {
       int ranX = adjustedRandom(minX, maxX);
       int ranZ = adjustedRandom(minZ, maxZ);
