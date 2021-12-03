@@ -1,6 +1,5 @@
 package com.twodevsstudio.devsbaselib.util;
 
-import com.ignitedev.curioslibrary.base.BlockCoordinates;
 import lombok.Getter;
 import lombok.NonNull;
 import org.bukkit.Bukkit;
@@ -61,20 +60,6 @@ public record CoordinatesCollection<T extends Collection<int[]>>(@Getter String 
       ));
     }
     return locations;
-  }
-
-  public Set<BlockCoordinates> asBlockCoordinatesSet() {
-    Set<BlockCoordinates> blockCoordinates = new HashSet<>();
-
-    for (int[] coordinate : this.coordinates) {
-      blockCoordinates.add(new BlockCoordinates(
-          coordinate[0],
-          coordinate[1],
-          coordinate[2],
-          this.worldName
-      ));
-    }
-    return blockCoordinates;
   }
 
   @NotNull
