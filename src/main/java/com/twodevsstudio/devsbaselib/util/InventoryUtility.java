@@ -36,6 +36,16 @@ public class InventoryUtility {
     return slot >= inventorySpace;
   }
 
+  /** @return -1 if not found */
+  public int getSlotOfItemStack(Inventory inventory, ItemStack itemStack) {
+    for (int i = 0; i < inventory.getSize(); i++) {
+      if (inventory.getItem(i).isSimilar(itemStack)) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
   public int getFreeSlots(Inventory inventory) {
     int count = 0;
 
