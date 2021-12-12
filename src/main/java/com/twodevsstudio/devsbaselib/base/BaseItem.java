@@ -59,9 +59,15 @@ public class BaseItem implements AbstractItem {
     if (itemMeta == null) {
       return defaultItemStack;
     }
-    itemMeta.setDisplayName(TextUtility.colorize(this.displayName));
-    itemMeta.setLore(TextUtility.colorize(this.lore));
-    itemMeta.addItemFlags(this.flags.toArray(new ItemFlag[0]));
+    if (this.displayName != null) {
+      itemMeta.setDisplayName(TextUtility.colorize(this.displayName));
+    }
+    if (this.lore != null) {
+      itemMeta.setLore(TextUtility.colorize(this.lore));
+    }
+    if (this.flags != null) {
+      itemMeta.addItemFlags(this.flags.toArray(new ItemFlag[0]));
+    }
     itemStack.setAmount(this.amount);
     itemStack.setItemMeta(itemMeta);
 
