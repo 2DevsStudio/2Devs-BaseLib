@@ -57,7 +57,8 @@ public class SchematicUtility {
   @SneakyThrows
   @Nullable
   public BlockVector3 paste(String schematic, Location location, Plugin plugin) {
-    File file = new File(plugin.getDataFolder(), schematic);
+    File file = new File(plugin.getDataFolder(), "schematics/" + schematic);
+    file.mkdirs();
 
     if (!file.exists()) {
       Bukkit.getLogger()
