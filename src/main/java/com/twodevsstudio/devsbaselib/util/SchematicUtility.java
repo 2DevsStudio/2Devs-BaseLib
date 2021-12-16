@@ -20,6 +20,7 @@ import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.Nullable;
 
@@ -33,11 +34,11 @@ import java.util.logging.Level;
 @UtilityClass
 public class SchematicUtility {
 
-  public void asyncPaste(String schematic, Location location, Consumer<Void> callback) {
+  public void asyncPaste(String schematic, Location location, Consumer<Void> callback, Plugin plugin) {
     new BukkitRunnable() {
       @Override
       public void run() {
-        paste(schematic, location);
+        paste(schematic, location, plugin);
 
         if (callback == null) {
           return;
@@ -48,19 +49,17 @@ public class SchematicUtility {
           public void run() {
             callback.accept(null);
           }
-        }.runTask(BaseLib.getInstance());
+        }.runTask(plugin);
       }
-    }.runTaskAsynchronously(BaseLib.getInstance());
+    }.runTaskAsynchronously(plugin);
   }
 
   @SneakyThrows
   @Nullable
-  public BlockVector3 paste(String schematic, Location location) {
-    File file = new File(BaseLib.getInstance().getSchematicDirectory() + schematic + ".schem");
+  public BlockVector3 paste(String schematic, Location location, Plugin plugin) {
+    File file = new File(plugin.getDataFolder(), "schematics/" + schematic);
+    file.mkdirs();
 
-    if (file.mkdirs()) {
-      Bukkit.getLogger().log(Level.INFO, "Created schematics directory!");
-    }
     if (!file.exists()) {
       Bukkit.getLogger()
           .log(

@@ -128,12 +128,6 @@
       <version>2.8.0</version>
     </dependency>
     <dependency>
-      <artifactId>paper</artifactId>
-      <groupId>net.minecraft</groupId>
-      <scope>provided</scope>
-      <version>1.17.1</version>
-    </dependency>
-    <dependency>
       <artifactId>commons-lang3</artifactId>
       <groupId>org.apache.commons</groupId>
       <version>3.12.0</version>
@@ -143,6 +137,12 @@
       <groupId>com.fastasyncworldedit</groupId>
       <scope>provided</scope>
       <version>1.17-308</version>
+    </dependency>
+    <dependency>
+      <artifactId>paper</artifactId>
+      <groupId>net.minecraft</groupId>
+      <scope>provided</scope>
+      <version>1.17.1</version>
     </dependency>
     <dependency>
       <groupId>com.sk89q.worldguard</groupId>
