@@ -1,6 +1,11 @@
 package com.twodevsstudio.devsbaselib;
 
+import com.google.gson.GsonBuilder;
+import com.twodevsstudio.devsbaselib.base.AbstractItem;
 import com.twodevsstudio.simplejsonconfig.SimpleJSONConfig;
+import com.twodevsstudio.simplejsonconfig.def.DefaultGsonBuilder;
+import com.twodevsstudio.simplejsonconfig.def.Serializer;
+import com.twodevsstudio.simplejsonconfig.def.adapters.InterfaceAdapter;
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -23,8 +28,8 @@ public final class BaseLib extends JavaPlugin {
 
   public BaseLib() {
     instance = this;
-
     processIO();
+    processTypeAdapters();
   }
 
   @Override
@@ -49,5 +54,13 @@ public final class BaseLib extends JavaPlugin {
         getLogger().log(Level.INFO, "Created Skin Textures Directory");
       }
     }
+  }
+
+  private void processTypeAdapters() {
+    GsonBuilder gsonBuilder = new DefaultGsonBuilder().getGsonBuilder();
+
+    gsonBuilder.registerTypeAdapter(AbstractItem.class, new InterfaceAdapter());
+
+    Serializer.getInst().setGson(gsonBuilder.create());
   }
 }
