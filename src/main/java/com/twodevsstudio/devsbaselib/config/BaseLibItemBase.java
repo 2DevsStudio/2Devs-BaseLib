@@ -15,18 +15,18 @@ import org.jetbrains.annotations.Nullable;
 @Configuration("itembase.json")
 public class BaseLibItemBase extends Config {
 
-  private List<AbstractItem> items = exampleItems();
+  private List<BaseItem> items = exampleItems();
 
   @Nullable
-  public AbstractItem getItemById(String id){
+  public BaseItem getItemById(String id){
     return this.items.stream()
-        .filter(abstractItem -> ((BaseItem) abstractItem).getId().equalsIgnoreCase(id))
+        .filter(abstractItem -> abstractItem.getId().equalsIgnoreCase(id))
         .findFirst()
         .orElse(null);
   }
 
-  private List<AbstractItem> exampleItems() {
-    List<AbstractItem> baseItems = new ArrayList<>();
+  private List<BaseItem> exampleItems() {
+    List<BaseItem> baseItems = new ArrayList<>();
 
     baseItems.add(
         new BaseItem("exampleItem1", Material.ANVIL, 1, "Example Item 1"));
