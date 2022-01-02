@@ -43,7 +43,13 @@ public final class BaseLib extends JavaPlugin {
   private void processIO() {
     File schematicsDirectoryFile = schematicDirectory.toFile();
     File skinTexturesDirectoryFile = skinTexturesDirectory.toFile();
+    File dataFolder = this.getDataFolder();
 
+    if (!dataFolder.exists()) {
+      if (dataFolder.mkdirs()) {
+        getLogger().log(Level.INFO, "Created Data folder");
+      }
+    }
     if (!schematicsDirectoryFile.exists()) {
       if (schematicsDirectoryFile.mkdirs()) {
         getLogger().log(Level.INFO, "Created Schematics Directory");
